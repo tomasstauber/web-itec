@@ -1,0 +1,29 @@
+---
+const { title = "ITEC El Molino" } = Astro.props;
+---
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>{title}</title>
+  </head>
+  <body>
+    <header>
+      <nav>
+        <a href="/">Inicio</a>
+        <a href="/institucional">Institucional</a>
+        <a href="/formacion/tecnicaturas">Tecnicaturas</a>
+        <a href="/servicios">Servicios</a>
+        <a href="/contacto">Contacto</a>
+      </nav>
+    </header>
+
+    <main>
+      <slot />
+    </main>
+
+    <footer>
+      <p>© 2026 ITEC El Molino</p>
+    </footer>
+  </body>
+</html>
