@@ -1,7 +1,17 @@
 ---
-import BaseLayout from '../layouts/BaseLayout.astro';
+import Layout from '../layouts/Layout.astro';
+import DATOS from '../data/datos.json';
 ---
-<BaseLayout title="Inicio – ITEC El Molino">
-  <h1>Sitio en construcción</h1>
-  <p>Página de inicio del ITEC El Molino.</p>
-</BaseLayout>
+
+<Layout title="Inicio">
+  <div class="contenedor seccion">
+    <p class="etiqueta">Instituto Tecnológico El Molino</p>
+    <h1>Prueba de tipografía y color</h1>
+    <button class="btn btn--primario">Botón de prueba</button>
+    <ul>
+      {DATOS.carreras.map(c => (
+        <li>{c.nombre} — {c.duracion}</li>
+      ))}
+  </ul>
+  </div>
+</Layout>

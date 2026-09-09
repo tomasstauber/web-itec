@@ -1,0 +1,190 @@
+{
+  "acreditacionBase": "Los títulos emitidos por el ITEC, como instituto de Educación Superior Privado Incorporado Nº 4085 por el <strong>Ministerio de Educación de la Provincia de Santa Fe</strong> y respondiendo a las normas fijadas al respecto por el <strong>Consejo Federal de Educación</strong>, tienen validez nacional y reconocimiento en todas las jurisdicciones.",
+  "carreras": [
+    {
+      "nombre": "TEC. SUPERIOR EN GESTIÓN INDUSTRIAL",
+      "descripcion": "<strong>El técnico puede implementar, evaluar, organizar y conducir diversas áreas organizacionales. Entre las que se encuentran: administración, comercialización, producción, finanzas, compras, ventas, entre otras.</strong><br><br>También se encuentra preparado para generar un emprendimiento propio.",
+      "duracion": "3 años",
+      "resolucion": "Aprobado por Resolución Nº 1185/2015",
+      "plan": "https://itec-elmolino.edu.ar/wp-content/uploads/2017/12/plan_de_estudio-tec_sup_gestion_industrial.pdf"
+    },
+    {
+      "nombre": "TEC. SUPERIOR EN MANTENIMIENTO INDUSTRIAL",
+      "descripcion": "<strong>El técnico puede gestionar el mantenimiento del equipamiento industrial. Esto permite, garantizar la producción y contribuir a la optimización de la organización.</strong><br><br>Puede desempañarse realizando mantenimiento: Eléctrico, hidráulico, neumático, electrónico y de instalaciones frigoríficas.<br><br>También se encuentra preparado para generar un emprendimiento propio.",
+      "duracion": "3 años",
+      "resolucion": "Aprobado por Resolución Nº 1186/2015",
+      "plan": "https://itec-elmolino.edu.ar/wp-content/uploads/2017/12/plan_de_estudio-tec_sup_mantenimiento_industrial.pdf"
+    },
+    {
+      "nombre": "TEC. SUPERIOR EN GESTIÓN DE ENERGÍAS RENOVABLES, USO RACIONAL Y EFICIENCIA ENERGÉTICA",
+      "nota": "No se abren las inscripciones para el ciclo lectivo 2026",
+      "descripcion": "<strong>El técnico puede diseñar, proyectar, evaluar y gestionar los sistemas energéticos.</strong><br>Para posicionarlos en un nivel óptimo en cuanto eficiencia y racionalidad en su uso.<br><br>También se encuentra preparado para generar un emprendimiento propio.",
+      "duracion": "3 años",
+      "resolucion": "Aprobado por Resolución Nº 1631/2015",
+      "plan": "https://itec-elmolino.edu.ar/wp-content/uploads/2017/12/plan_de_estudio-tec_sup_gestion_energia.pdf"
+    },
+    {
+      "nombre": "TEC. SUPERIOR EN LOGÍSTICA",
+      "descripcion": "<strong>El Técnico Superior en Logística está capacitado para organizar y gestionar la distribución y despacho, el transporte, la recepción y el almacenamiento de bienes, como así también estar a cargo de la información administrativa vinculada a estos procesos.</strong><br><br>Para lograr mayor efectividad en los procesos productivos industriales.<br><br>También se encuentra preparado para generar un emprendimiento propio.",
+      "duracion": "3 años",
+      "resolucion": "Aprobado por Resolución Nº 0377/2016",
+      "plan": "https://itec-elmolino.edu.ar/wp-content/uploads/2017/10/plan_de_estudio-tec_sup_logistica.pdf"
+    },
+    {
+      "nombre": "TEC. SUPERIOR EN DESARROLLO DE SOFTWARE",
+      "descripcion": "<strong>El Técnico Superior en Desarrollo de Software se encuentra habilitado para diseñar, construir y verificar artefactos de software de complejidad media, correspondientes a sistemas de información, o vinculados indirectamente al hardware o a sistemas de comunicación de datos, respondiendo a especificaciones.</strong><br><br>También se encuentra preparado para generar un emprendimiento propio.",
+      "duracion": "3 años",
+      "resolucion": "Aprobado por Resolución Nº 2120/2016 ANEXO 1",
+      "plan": "https://itec-elmolino.edu.ar/wp-content/uploads/2022/09/Tec.-Sup.-Desarrollo-de-Software.pdf"
+    },
+    {
+      "nombre": "TEC. SUPERIOR EN SEGURIDAD, HIGIENE Y MEDIO AMBIENTE EN EL TRABAJO",
+      "descripcion": "<strong>El Técnico Superior en Seguridad, Higiene y Medio Ambiente en el Trabajo se encuentra habilitado para aplicar métodos seguros, organizar actividades de higiene y seguridad laboral, asesorar en la implementación de programas para la salud de los trabajadores, supervisar riesgos, impartir cursos, realizar auditorías y desarrollar investigaciones relacionadas con accidentes y seguridad en el entorno laboral.</strong><br><br>También se encuentra preparado para generar un emprendimiento propio.",
+      "duracion": "3 años",
+      "resolucion": "Aprobado mediante Resolución N° 1584",
+      "plan": "https://drive.google.com/file/d/1YmjMuMXjEZ8zSiHhME58_v6p-Cq0Ylyf/view"
+    }
+  ],
+  "autoridades": [
+    {
+      "cargo": "Presidente",
+      "nombre": "Víctor Sarmiento",
+      "entidad": "CICAE"
+    },
+    {
+      "cargo": "Vice-Presidente",
+      "nombre": "Andrés Grenón",
+      "entidad": "Municipalidad de Esperanza – Dpto. Ejecutivo"
+    },
+    {
+      "cargo": "Secretario",
+      "nombre": "María Victoria Nagel",
+      "entidad": "Municipalidad de Esperanza – Dpto. Ejecutivo"
+    },
+    {
+      "cargo": "Pro-Secretario",
+      "nombre": "Diego Alonso",
+      "entidad": "Sociedad Rural de las Colonias"
+    },
+    {
+      "cargo": "Tesorero",
+      "nombre": "Ana M. Marnico",
+      "entidad": "CICAE"
+    },
+    {
+      "cargo": "Pro-Tesorero",
+      "nombre": "Hugo Ortega",
+      "entidad": "Municipalidad de Esperanza – Dpto. Ejecutivo"
+    },
+    {
+      "cargo": "Vocal 1º",
+      "nombre": "Hugo Enrique Weidmann",
+      "entidad": "CICAE"
+    },
+    {
+      "cargo": "Vocal 2º",
+      "nombre": "Jorge Allín",
+      "entidad": "CICAE"
+    },
+    {
+      "cargo": "Vocal 3º",
+      "nombre": "Eduardo Weidmann",
+      "entidad": "Sociedad Rural de las Colonias"
+    },
+    {
+      "cargo": "Vocal 4º",
+      "nombre": "Nicolás Cardozo",
+      "entidad": "Municipalidad de Esperanza – Dpto. Ejecutivo"
+    },
+    {
+      "cargo": "Vocal 5º",
+      "nombre": "Nicolás Kinen",
+      "entidad": "Municipalidad de Esperanza – Concejo Deliberante"
+    },
+    {
+      "cargo": "Vocal 6º",
+      "nombre": "Andrea Voelkli",
+      "entidad": "Municipalidad de Esperanza – Concejo Deliberante"
+    }
+  ],
+  "equipo": [
+    {
+      "cargo": "Dirección General",
+      "nombre": "Lic. Gustavo Zenclussen"
+    },
+    {
+      "cargo": "Dirección Formación Profesional y Capacitación",
+      "nombre": "Lic. María Verónica Cardoso"
+    },
+    {
+      "cargo": "Dirección Tecnicaturas",
+      "nombre": "Lic. Ma. Jimena Haye"
+    },
+    {
+      "cargo": "Gestión Académica Tecnicaturas",
+      "nombre": "Téc. Sup. Verónica Ravasio"
+    },
+    {
+      "cargo": "Gestión Administrativa",
+      "nombre": "Téc. Sup. Nerina Della Bitta"
+    },
+    {
+      "cargo": "Gestión Operativa Formación profesional y Capacitación",
+      "nombre": "Téc. Sup. Cristian Tapia"
+    },
+    {
+      "cargo": "Responsable de Talleres y Laboratorios",
+      "nombre": "Téc. Sup. Miguel Grasso"
+    },
+    {
+      "cargo": "Gestión de Proyectos y Financiamiento",
+      "nombre": "Lic. Virginia Mainardi"
+    },
+    {
+      "cargo": "Gestión Operativa Tecnicaturas",
+      "nombre": "Téc. Sup. Franco Kiverling"
+    },
+    {
+      "cargo": "Auxiliar de Talleres y Laboratorios",
+      "nombre": "Téc. Sup. Natalia Villalba"
+    }
+  ],
+  "noticias": [
+    {
+      "titulo": "La Mesa de Soldadura fortalece el trabajo articulado para la formación y el desarrollo del sector metalúrgico",
+      "fecha": "11 de agosto, 2026",
+      "categorias": "Institucionales, Noticias",
+      "resumen": "El espacio de cooperación, impulsado desde 2022, reunió nuevamente a […]",
+      "cuerpo": [
+        "El espacio de cooperación, impulsado desde 2022, reunió nuevamente a representantes de empresas metalúrgicas, instituciones educativas y organismos del sector.",
+        "[ texto completo del artículo — pendiente de contenido real ]",
+        "[ texto completo del artículo — pendiente de contenido real ]"
+      ],
+      "foto": "reunión Mesa de Soldadura"
+    },
+    {
+      "titulo": "La formación a medida fortalece el desarrollo del talento en las empresas",
+      "fecha": "30 de julio, 2026",
+      "categorias": "Cursos y Servicios, Noticias",
+      "resumen": "El ITEC y Yeruvá S.A. desarrollan conjuntamente una propuesta de […]",
+      "cuerpo": [
+        "El ITEC y Yeruvá S.A. desarrollan conjuntamente una propuesta de formación a medida para el personal de la empresa.",
+        "[ texto completo del artículo — pendiente de contenido real ]",
+        "[ texto completo del artículo — pendiente de contenido real ]"
+      ],
+      "foto": "capacitación en planta"
+    },
+    {
+      "titulo": "Comenzó la segunda edición del curso de “Mantenimiento y Reparación de Motores a Explosión”",
+      "fecha": "30 de julio, 2026",
+      "categorias": "Cursos y Servicios, Noticias",
+      "resumen": "La propuesta vuelve a dictarse en el ITEC en respuesta […]",
+      "cuerpo": [
+        "La propuesta vuelve a dictarse en el ITEC en respuesta a la demanda de la primera edición.",
+        "[ texto completo del artículo — pendiente de contenido real ]",
+        "[ texto completo del artículo — pendiente de contenido real ]"
+      ],
+      "foto": "curso de motores en taller"
+    }
+  ]
+}
