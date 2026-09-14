@@ -79,6 +79,27 @@ h3,.h3{font-size:20px;font-weight:600;line-height:1.35}
 
 /* Grillas genéricas — colapsan a una columna en mobile */
 .grilla{display:grid;gap:24px}
+
+/* Banda de cabecera de las páginas internas MISION Y VISION*/
+.banda{
+  color:var(--blanco);
+  padding:72px 0;
+  background:var(--gris-900);
+}
+
+.banda .etiqueta{
+  opacity:.85;
+}
+
+.banda h1{
+  margin-top:10px;
+}
+
+/* Títulos de las tarjetas institucionales MISION Y VISION */
+.titulo-tarjeta{
+  color:var(--rojo);
+}
+
 .grilla--2{grid-template-columns:repeat(2,1fr)}
 .grilla--3{grid-template-columns:repeat(3,1fr)}
 
