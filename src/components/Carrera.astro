@@ -1,4 +1,6 @@
 ---
+import datos from '../data/datos.json';
+
 interface Carrera {
   nombre: string;
   descripcion: string;
@@ -17,4 +19,93 @@ const { carrera } = Astro.props;
 
 <article class="carrera">
   <h3>{carrera.nombre}</h3>
+  {carrera.nota && <p class="carrera__nota">({carrera.nota})</p>}
+  <p set:html={carrera.descripcion} />
+
+  <div class="acordeon">
+    <button class="acordeon__boton" aria-expanded="false">
+      Duración <span class="mas">+</span>
+    </button>
+    <div class="acordeon__panel">
+      <p>{carrera.duracion}</p>
+    </div>
+  </div>
+
+  <div class="acordeon">
+    <button class="acordeon__boton" aria-expanded="false">
+      Acreditación Oficial <span class="mas">+</span>
+    </button>
+    <div class="acordeon__panel">
+      <p><strong>{carrera.resolucion}</strong></p>
+      <p set:html={datos.acreditacionBase} />
+    </div>
+  </div>
+
+  <div class="acordeon">
+    <button class="acordeon__boton" aria-expanded="false">
+      Plan de Estudio <span class="mas">+</span>
+    </button>
+    <div class="acordeon__panel">
+      <p><a href={carrera.plan} target="_blank" rel="noopener">Descargar Plan de Estudio ↗</a></p>
+    </div>
+  </div>
 </article>
+
+<style>
+  .acordeon {
+    border-top: 1px solid var(--gris-100);
+  }
+
+  .acordeon__boton {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 16px 32px;
+    background: none;
+    border: none;
+    font-weight: 700;
+    text-transform: uppercase;
+    cursor: pointer;
+    min-height: 44px;
+  }
+
+  .acordeon__boton:hover {
+    background: var(--gris-100);
+  }
+
+  .mas {
+    font-size: 20px;
+    transition: transform 0.2s;
+  }
+
+  .acordeon__panel {
+    display: none;
+    padding: 0 32px 24px;
+  }
+
+  .acordeon.abierto .acordeon__panel {
+    display: block;
+  }
+
+  .acordeon.abierto .mas {
+    transform: rotate(45deg);
+  }
+
+  </style>
+
+<script>
+  document.addEventListener('click', (evento) => {
+    const objetivo = evento.target;
+    if (!(objetivo instanceof Element)) return;
+
+    const boton = objetivo.closest('.acordeon__boton');
+    if (!boton) return;
+
+    const acordeon = boton.closest('.acordeon');
+    if (!acordeon) return;
+
+    const estaAbierto = acordeon.classList.toggle('abierto');
+    boton.setAttribute('aria-expanded', String(estaAbierto));
+  });
+</script>
