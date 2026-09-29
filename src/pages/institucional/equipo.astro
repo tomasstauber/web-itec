@@ -1,0 +1,47 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import DATOS from '../../data/datos.json';
+---
+
+<Layout title="Equipo de trabajo">
+
+  <main>
+
+    <!-- Banda de título -->
+    <section class="banda">
+      <div class="contenedor">
+        <p class="etiqueta">Institucional</p>
+        <h1>Equipo de trabajo</h1>
+      </div>
+    </section>
+
+    <!-- Equipo de trabajo -->
+    <section class="seccion">
+      <div class="contenedor">
+
+        <div class="grilla grilla--2">
+
+          {
+            DATOS.equipo.map((integrante) => (
+              <article class="tarjeta">
+
+                <h2 class="titulo-tarjeta">
+                  {integrante.cargo}
+                </h2>
+
+                <p class="bajada">
+                  <strong>{integrante.nombre}</strong>
+                </p>
+
+              </article>
+            ))
+          }
+
+        </div>
+
+      </div>
+    </section>
+
+  </main>
+
+</Layout>
