@@ -1,0 +1,68 @@
+---
+import Layout from '../../../layouts/Layout.astro';
+import DATOS from '../../../data/datos.json';
+---
+
+<Layout title="Noticias">
+
+  <main>
+
+    <section class="banda">
+      <div class="contenedor">
+        <p class="etiqueta">Institucional</p>
+        <h1>Noticias</h1>
+      </div>
+    </section>
+
+    <section class="seccion">
+      <div class="contenedor">
+
+        <div class="grilla grilla--3">
+
+          {DATOS.noticias.map((noticia) => (
+
+            <article class="tarjeta">
+
+              <!-- Foto de la noticia -->
+              <figure class="foto">
+                <img
+                  src={noticia.foto}
+                  alt={noticia.titulo}
+                />
+              </figure>
+
+              <!-- Fecha -->
+              <p class="etiqueta">
+                {noticia.fecha}
+              </p>
+
+              <!-- Título -->
+              <h2 class="h3 titulo-tarjeta">
+                {noticia.titulo}
+              </h2>
+
+              <!-- Resumen -->
+              <p>
+                {noticia.resumen}
+              </p>
+
+              <!-- Leer noticia completa -->
+              <a
+                href={`/institucional/noticias/${noticia.slug}`}
+                class="btn btn--primario"
+              >
+                Leer más
+              </a>
+
+            </article>
+
+          ))}
+
+        </div>
+
+      </div>
+    </section>
+
+  </main>
+
+</Layout>
