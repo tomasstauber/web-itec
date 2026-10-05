@@ -1,0 +1,161 @@
+---
+import Layout from '../../layouts/Layout.astro';
+
+const grupos = [
+  {
+    rol: 'Impulsados por',
+    entidades: ['Ministerio de Trabajo, Empleo y Seguridad Social'],
+  },
+  {
+    rol: 'Organizan',
+    entidades: ['ADIMRA', 'IAEA', 'RED de Centros'],
+  },
+  {
+    rol: 'Colaboran',
+    entidades: ['CICAE', 'Esperanza', 'Sociedad Rural'],
+  },
+];
+---
+
+<Layout title="Formación Profesional">
+
+  <main>
+
+    <!-- Banda de título -->
+    <section class="banda" style="--acento:var(--prof)">
+      <div class="contenedor">
+        <p class="etiqueta">Formación</p>
+        <h1>Formación Profesional</h1>
+        <p class="banda__intro">
+          Cursos y programas orientados a fortalecer capacidades en los actuales
+          y futuros trabajadores. Aprendizaje y perfeccionamiento de un oficio
+          o profesión.
+        </p>
+      </div>
+    </section>
+
+    <!-- Introducción -->
+    <section class="seccion">
+      <div class="contenedor centrado">
+        <p class="bajada intro">
+          Promovemos el enfoque de “formación basada en competencias”: mayor
+          integración entre el proceso formativo del alumno y su futuro
+          desempeño como trabajador, en una situación real de trabajo, con
+          espacios preparados para la formación práctica.
+        </p>
+      </div>
+    </section>
+
+    <!-- Franja de instituciones por rol -->
+    <section class="seccion seccion--gris">
+      <div class="contenedor">
+
+        <div class="grilla grilla--3">
+
+          {
+            grupos.map((grupo) => (
+              <div class="centrado">
+
+                <p class="etiqueta rol">{grupo.rol}</p>
+
+                <div class="logos">
+                  {grupo.entidades.map((entidad) => (
+                    <span class="chip-logo">{entidad}</span>
+                  ))}
+                </div>
+
+              </div>
+            ))
+          }
+
+        </div>
+
+      </div>
+    </section>
+
+    <!-- Trayectos y cursos -->
+    <section class="seccion">
+      <div class="contenedor">
+
+        <div class="grilla grilla--2">
+
+          <article class="tarjeta tarjeta--trayecto" style="--acento:var(--prof)">
+            <h2 class="h3">Trayectos Formativos</h2>
+
+            <p class="bajada">
+              Permiten al alumno estructurar y profundizar su formación a través
+              de una secuencia de cursos. Los objetivos de cada formación surgen
+              en términos de capacidades que necesita desarrollar el alumno para
+              la actividad o especialidad elegida.
+            </p>
+
+            <a class="btn btn--primario" href="/contacto">
+              Conocé nuestros trayectos formativos
+            </a>
+          </article>
+
+          <article class="tarjeta tarjeta--trayecto" style="--acento:var(--prof)">
+            <h2 class="h3">Cursos Vigentes</h2>
+
+            <p class="bajada">
+              Cursos de formación profesional para el desarrollo de competencias
+              laborales.
+            </p>
+
+            <a class="btn btn--primario" href="/contacto">
+              Ver cursos
+            </a>
+          </article>
+
+        </div>
+
+        <!-- Certificación IRAM -->
+        <div class="centrado certificacion">
+
+          <p class="bajada">
+            <strong>ITEC EL MOLINO es institución certificada</strong><br />
+            por referencial IRAM – MTEYSS
+          </p>
+
+          <div class="logos">
+            <span class="chip-logo">IRAM</span>
+            <span class="chip-logo">MTEySS</span>
+          </div>
+
+        </div>
+
+      </div>
+    </section>
+
+  </main>
+
+</Layout>
+
+<style>
+
+  /* Párrafo introductorio centrado y con ancho de lectura */
+  .intro {
+    max-width: 800px;
+    margin: 0 auto;
+  }
+
+  /* Título de cada columna de la franja */
+  .rol {
+    color: var(--gris-600);
+    margin-bottom: 16px;
+  }
+
+  /* Nota de certificación debajo de las tarjetas */
+  .certificacion {
+    margin-top: 56px;
+  }
+
+  .certificacion strong {
+    color: var(--gris-900);
+  }
+
+  .certificacion .logos {
+    margin-top: 20px;
+  }
+
+</style>
