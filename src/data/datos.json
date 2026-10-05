@@ -151,6 +151,7 @@
   ],
   "noticias": [
     {
+      "slug": "mesa-de-soldadura",
       "titulo": "La Mesa de Soldadura fortalece el trabajo articulado para la formación y el desarrollo del sector metalúrgico",
       "fecha": "11 de agosto, 2026",
       "categorias": "Institucionales, Noticias",
@@ -160,9 +161,10 @@
         "[ texto completo del artículo — pendiente de contenido real ]",
         "[ texto completo del artículo — pendiente de contenido real ]"
       ],
-      "foto": "reunión Mesa de Soldadura"
+      "foto": "/imagenes/institucional/noticias/mesa-de-soldadura.jpeg"
     },
     {
+      "slug": "formacion-a-medida",
       "titulo": "La formación a medida fortalece el desarrollo del talento en las empresas",
       "fecha": "30 de julio, 2026",
       "categorias": "Cursos y Servicios, Noticias",
@@ -172,9 +174,10 @@
         "[ texto completo del artículo — pendiente de contenido real ]",
         "[ texto completo del artículo — pendiente de contenido real ]"
       ],
-      "foto": "capacitación en planta"
+      "foto": "/imagenes/institucional/noticias/formacion-a-medida.jpeg"
     },
     {
+      "slug": "mantenimiento-motores",
       "titulo": "Comenzó la segunda edición del curso de “Mantenimiento y Reparación de Motores a Explosión”",
       "fecha": "30 de julio, 2026",
       "categorias": "Cursos y Servicios, Noticias",
@@ -184,7 +187,8 @@
         "[ texto completo del artículo — pendiente de contenido real ]",
         "[ texto completo del artículo — pendiente de contenido real ]"
       ],
-      "foto": "curso de motores en taller"
+      "foto": "/imagenes/institucional/noticias/mantenimiento-motores.jpeg"
+      
     }
   ]
 }
