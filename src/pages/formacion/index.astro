@@ -1,0 +1,104 @@
+---
+import Layout from '../../layouts/Layout.astro';
+
+const trayectos = [
+  {
+    sello: 'TEC',
+    acento: 'var(--tec)',
+    titulo: 'Tecnicaturas Terciarias',
+    href: '/formacion/tecnicaturas',
+    boton: 'Ver Tecnicaturas',
+    parrafos: [
+      'Las tecnicaturas terciarias conectan directamente la educación y el trabajo. Responden a demandas tanto sociales como productivas.',
+      '› Preparamos al alumno para desempeñarse como mando medio dentro de la estructura organizacional.',
+    ],
+  },
+  {
+    sello: 'PROF',
+    acento: 'var(--prof)',
+    titulo: 'Formación Profesional',
+    href: '/formacion/profesional',
+    boton: 'Ver Cursos',
+    parrafos: [
+      'Cursos y programas orientados a fortalecer capacidades en los actuales y futuros trabajadores.',
+      '› Aprendizaje y perfeccionamiento de un oficio o profesión.',
+    ],
+  },
+  {
+    sello: 'CAP',
+    acento: 'var(--cap)',
+    titulo: 'Capacitaciones',
+    href: '/formacion/capacitaciones',
+    boton: 'Ver Capacitaciones',
+    parrafos: [
+      'Formación, actualización y perfeccionamiento de personas que trabajan en organizaciones, para responder a demandas actuales de los puestos de trabajo y a los cambios de la vida empresarial.',
+    ],
+  },
+];
+---
+
+<Layout title="Formación">
+
+  <main>
+
+    <!-- Banda de título -->
+    <section class="banda">
+      <div class="contenedor">
+        <p class="etiqueta">Formación</p>
+        <h1>Tres trayectos, un mismo objetivo</h1>
+        <p class="banda__intro">
+          Espacios propicios para el logro de aprendizaje significativos de los
+          distintos niveles organizacionales.
+        </p>
+      </div>
+    </section>
+
+    <!-- Trayectos -->
+    <section class="seccion">
+      <div class="contenedor">
+
+        <div class="grilla grilla--3">
+
+          {
+            trayectos.map((trayecto) => (
+              <article class="tarjeta tarjeta--trayecto" style={`--acento:${trayecto.acento}`}>
+
+                <span class="sello-trayecto">{trayecto.sello}</span>
+
+                <h2 class="h3">{trayecto.titulo}</h2>
+
+                {trayecto.parrafos.map((parrafo) => (
+                  <p class="bajada">{parrafo}</p>
+                ))}
+
+                <a class="btn btn--primario" href={trayecto.href}>
+                  {trayecto.boton}
+                </a>
+
+              </article>
+            ))
+          }
+
+        </div>
+
+      </div>
+    </section>
+
+  </main>
+
+</Layout>
+
+<style>
+  /* Texto introductorio dentro de la banda */
+  .banda__intro {
+    margin-top: 14px;
+    max-width: 760px;
+    font-size: 18px;
+    opacity: .94;
+  }
+
+  /* El botón toma el color del trayecto de su tarjeta */
+  .tarjeta--trayecto .btn {
+    background: var(--acento);
+  }
+</style>
