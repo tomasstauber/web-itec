@@ -1,0 +1,332 @@
+---
+/* ============================================================
+   FOOTER — Issue #3
+   Aparece en todas las páginas (se incluye desde Layout.astro).
+   Cuatro columnas: contacto, mapa del sitio, newsletter e
+   instituciones asociadas + redes. Abajo, la línea legal.
+   ============================================================ */
+
+interface Enlace {
+  texto: string;
+  href: string;
+}
+
+interface Red extends Enlace {
+  /* Símbolo que se muestra dentro del círculo. */
+  icono: string;
+}
+
+const MAPA: Enlace[] = [
+  { texto: 'Inicio', href: '/' },
+  { texto: 'Institucional', href: '/institucional/mision' },
+  { texto: 'Formación', href: '/formacion' },
+  { texto: 'Servicios', href: '/servicios' },
+  { texto: 'Contacto', href: '/contacto' },
+  { texto: 'Empresas que Educan', href: '/empresas' },
+];
+
+const INSTITUCIONES: Enlace[] = [
+  {
+    texto: 'RED de Centros Tecnológicos ADIMRA',
+    href: 'http://www.adimra.org.ar/reddecentros/inicio.do',
+  },
+  { texto: 'Ministerio de Trabajo', href: 'https://www.argentina.gob.ar/trabajo' },
+];
+
+const REDES: Red[] = [
+  { texto: 'X', icono: '𝕏', href: 'https://x.com/ItecElMolino?lang=es' },
+  { texto: 'Facebook', icono: 'f', href: 'https://www.facebook.com/itecelmolinoesperanza/' },
+  { texto: 'Instagram', icono: 'IG', href: 'https://www.instagram.com/itecelmolino/?hl=es' },
+  { texto: 'YouTube', icono: '▶', href: 'https://www.youtube.com/channel/UCNzjGtY_djCCKAjd4udFV_g' },
+];
+---
+
+<footer class="footer">
+  <div class="contenedor">
+    <div class="footer__grilla">
+
+      <!-- 1. Contacto -->
+      <div>
+        <h2 class="footer__titulo">ITEC El Molino</h2>
+        <p class="footer__dato">Rivadavia 1390, 1er. Piso.<br />Esperanza. Santa Fe</p>
+        <a href="mailto:info@itec-elmolino.edu.ar">info@itec-elmolino.edu.ar</a>
+        <p class="footer__dato">Tel: 03496 - 426593</p>
+        <p class="footer__dato footer__dato--ultimo">Ws: 03496-15502218</p>
+      </div>
+
+      <!-- 2. Mapa del sitio -->
+      <nav aria-label="Mapa del sitio">
+        <h2 class="footer__titulo">Mapa del sitio</h2>
+        {MAPA.map(enlace => <a href={enlace.href}>{enlace.texto}</a>)}
+      </nav>
+
+      <!-- 3. Newsletter -->
+      <div>
+        <h2 class="footer__titulo">Newsletter ITEC</h2>
+        <form id="formFooter" novalidate>
+          <label class="solo-lectores" for="fNombre">Nombre</label>
+          <input id="fNombre" name="nombre" type="text" placeholder="Nombre" autocomplete="name" />
+
+          <label class="solo-lectores" for="fEmail">Email (obligatorio)</label>
+          <input
+            id="fEmail"
+            name="email"
+            type="email"
+            placeholder="Email *"
+            required
+            autocomplete="email"
+            aria-describedby="errorFooter"
+          />
+          <!-- Aviso de error solo para lectores de pantalla: visualmente
+               el error se indica con el borde rojo, como en el prototipo -->
+          <p class="solo-lectores" id="errorFooter" role="alert"></p>
+
+          <button class="btn btn--primario" type="submit">Suscribirme</button>
+          <p class="form-ok" id="okFooter" role="status">¡Suscripción registrada! (Demostración)</p>
+        </form>
+      </div>
+
+      <!-- 4. Instituciones asociadas + redes -->
+      <div>
+        <h2 class="footer__titulo">Instituciones asociadas</h2>
+        {INSTITUCIONES.map(enlace => (
+          <a href={enlace.href} target="_blank" rel="noopener">{enlace.texto} ↗</a>
+        ))}
+
+        <h2 class="footer__titulo footer__titulo--redes">Seguinos</h2>
+        <div class="redes">
+          {REDES.map(red => (
+            <a href={red.href} target="_blank" rel="noopener" aria-label={red.texto}>{red.icono}</a>
+          ))}
+        </div>
+      </div>
+
+    </div>
+
+    <!-- Línea legal -->
+    <div class="footer__legal">
+      <span>© Instituto Tecnológico El Molino · Esperanza, Santa Fe · 25 años formando personas valiosas para la región y sus empresas.</span>
+    </div>
+  </div>
+</footer>
+
+<style>
+  .footer {
+    background: var(--gris-900);
+    color: #cfcfcf;
+    padding: 64px 0 0;
+  }
+
+  /* ---------- Grilla de 4 columnas ---------- */
+  .footer__grilla {
+    display: grid;
+    grid-template-columns: 1.2fr 1fr 1.3fr 1fr;
+    gap: 40px;
+  }
+
+  .footer__titulo {
+    color: #fff;
+    font-size: 15px;
+    font-weight: 700;
+    line-height: 1.6;
+    text-transform: uppercase;
+    letter-spacing: .1em;
+    margin-bottom: 16px;
+  }
+
+  .footer__titulo--redes {
+    margin-top: 24px;
+  }
+
+  .footer__dato {
+    font-size: 15px;
+    margin-bottom: 10px;
+  }
+
+  .footer__dato--ultimo {
+    margin-bottom: 0;
+  }
+
+  /* ---------- Links ---------- */
+  .footer a {
+    display: block;
+    color: #cfcfcf;
+    font-size: 15px;
+    margin-bottom: 10px;
+  }
+
+  .footer a:hover {
+    color: #fff;
+  }
+
+  .footer a:focus-visible,
+  .footer input:focus-visible {
+    outline: 3px solid #fff;
+    outline-offset: 2px;
+  }
+
+  /* ---------- Newsletter ---------- */
+  .footer input {
+    width: 100%;
+    font-family: inherit;
+    font-size: 15px;
+    padding: 11px 13px;
+    border-radius: 8px;
+    border: 1px solid #555;
+    background: #3f3f3f;
+    color: #fff;
+    margin-bottom: 10px;
+  }
+
+  .footer input::placeholder {
+    color: #999;
+  }
+
+  /* La clase .invalido la agrega el JS de validación */
+  .footer input.invalido {
+    border-color: var(--rojo);
+  }
+
+  /* Con foco, el contorno también pasa a rojo (más claro, para que
+     contraste sobre el fondo oscuro) y el error no queda tapado */
+  .footer input.invalido:focus-visible {
+    outline-color: #ff7a85;
+  }
+
+  .footer .btn {
+    padding: 11px 20px;
+    font-size: 14px;
+  }
+
+  /* Confirmación: mismos colores de .form-ok adaptados al fondo oscuro.
+     La clase .visible la agrega el JS cuando el email es válido. */
+  .footer .form-ok {
+    background: #3f3f3f;
+    border-color: #5a5a5a;
+    color: #bfe3bf;
+  }
+
+  .footer .form-ok.visible {
+    display: block;
+  }
+
+  /* Texto disponible para lectores de pantalla pero oculto a la vista */
+  .solo-lectores {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    margin: -1px;
+    padding: 0;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border: 0;
+  }
+
+  /* ---------- Redes sociales ---------- */
+  .redes {
+    display: flex;
+    gap: 12px;
+  }
+
+  .redes a {
+    width: 38px;
+    height: 38px;
+    border-radius: 50%;
+    border: 1px solid #555;
+    display: grid;
+    place-items: center;
+    font-size: 13px;
+    font-weight: 700;
+    margin: 0;
+  }
+
+  .redes a:hover {
+    background: var(--rojo);
+    border-color: var(--rojo);
+    color: #fff;
+  }
+
+  /* ---------- Línea legal ---------- */
+  .footer__legal {
+    border-top: 1px solid #4a4a4a;
+    margin-top: 48px;
+    padding: 20px 0;
+    font-size: 13px;
+    color: #9a9a9a;
+    display: flex;
+    justify-content: space-between;
+    gap: 16px;
+    flex-wrap: wrap;
+  }
+
+  /* ---------- Responsive ---------- */
+  @media (max-width: 900px) {
+    .footer__grilla {
+      grid-template-columns: 1fr 1fr;
+    }
+  }
+
+  @media (max-width: 560px) {
+    .footer__grilla {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>
+
+<script>
+  /* Validación del newsletter (demostración: no envía datos a ningún lado). */
+  const EMAIL_VALIDO = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+  const SEGUNDOS_CONFIRMACION = 4;
+
+  const form = document.getElementById('formFooter');
+  const nombre = document.getElementById('fNombre');
+  const email = document.getElementById('fEmail');
+  const error = document.getElementById('errorFooter');
+  const ok = document.getElementById('okFooter');
+
+  let temporizador: number | undefined;
+
+  if (
+    form instanceof HTMLFormElement &&
+    nombre instanceof HTMLInputElement &&
+    email instanceof HTMLInputElement
+  ) {
+    function marcarEmail(valido: boolean) {
+      email.classList.toggle('invalido', !valido);
+      email.setAttribute('aria-invalid', String(!valido));
+      if (error) error.textContent = valido ? '' : 'Ingresá un email válido.';
+    }
+
+    form.addEventListener('submit', (evento) => {
+      evento.preventDefault(); // la validación la hace el JS, no el navegador
+
+      const valido = EMAIL_VALIDO.test(email.value.trim());
+      marcarEmail(valido);
+
+      if (!valido) {
+        ok?.classList.remove('visible');
+        email.focus();
+        return;
+      }
+
+      // Email correcto: se muestra la confirmación y se limpia el formulario
+      nombre.value = '';
+      email.value = '';
+      ok?.classList.add('visible');
+
+      window.clearTimeout(temporizador);
+      temporizador = window.setTimeout(
+        () => ok?.classList.remove('visible'),
+        SEGUNDOS_CONFIRMACION * 1000,
+      );
+    });
+
+    // Al corregir el email, el borde rojo desaparece sin esperar al envío
+    email.addEventListener('input', () => {
+      if (email.classList.contains('invalido') && EMAIL_VALIDO.test(email.value.trim())) {
+        marcarEmail(true);
+      }
+    });
+  }
+</script>
