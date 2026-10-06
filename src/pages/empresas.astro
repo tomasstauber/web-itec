@@ -1,0 +1,182 @@
+---
+import Layout from '../layouts/Layout.astro';
+---
+
+<Layout title="Empresas que Educan">
+
+  <main>
+
+    <!-- Banda de título -->
+    <section class="banda" style="--acento:var(--gris-900)">
+      <div class="contenedor">
+        <p class="etiqueta">Programa</p>
+        <h1>Empresas que Educan</h1>
+        <p class="banda__intro">
+          Potenciar la vinculación del ITEC con las empresas de la ciudad y
+          fidelizar su relación a través de la generación de espacios de
+          intercambio y formación.
+        </p>
+      </div>
+    </section>
+
+    <!-- Círculo virtuoso -->
+    <section class="seccion">
+      <div class="contenedor centrado revelar">
+
+        <h2 class="circulo__titulo">Un círculo virtuoso</h2>
+        <p class="bajada circulo__bajada">
+          El programa articula al instituto, los empleados y las empresas de la
+          región en un mismo recorrido de formación.
+        </p>
+
+        <!-- Diagrama circular: El Molino → Empleados → Empresas → El Molino.
+             El contenedor es position:relative y todo lo de adentro se ubica
+             con position:absolute, en porcentajes, para que escale solo. -->
+        <div
+          class="diagrama"
+          role="img"
+          aria-label="Diagrama circular: El Molino, Empleados y Empresas conectados por el intercambio y la formación"
+        >
+          <div class="diagrama__anillo"></div>
+
+          <div class="diagrama__centro">Intercambio y formación</div>
+
+          <div class="nodo nodo--a">El Molino<small>forma</small></div>
+          <div class="nodo nodo--b">Empresas<small>impulsan</small></div>
+          <div class="nodo nodo--c">Empleados<small>se capacitan</small></div>
+
+          <span class="diagrama__flecha f1">→</span>
+          <span class="diagrama__flecha f2">→</span>
+          <span class="diagrama__flecha f3">→</span>
+        </div>
+
+        <a class="btn btn--primario" href="/contacto">Sumá tu empresa</a>
+
+      </div>
+    </section>
+
+  </main>
+
+</Layout>
+
+<style>
+  .circulo__titulo {
+    margin-bottom: 8px;
+  }
+
+  .circulo__bajada {
+    max-width: 640px;
+    margin: 0 auto;
+  }
+
+  /* ---------- Diagrama circular ---------- */
+
+  /* Cuadrado que contiene todo: como mucho 420px, y nunca más ancho
+     que el contenedor, así en celulares no se sale de la pantalla */
+  .diagrama {
+    position: relative;
+    display: grid;
+    place-items: center;
+    width: min(420px, 100%);
+    aspect-ratio: 1;
+    margin: 40px auto;
+  }
+
+  /* Anillo punteado que ocupa todo el cuadrado */
+  .diagrama__anillo {
+    position: absolute;
+    inset: 0;
+    border-radius: 50%;
+    border: 2px dashed var(--gris-300);
+  }
+
+  /* Círculo central (lo centra el place-items del contenedor) */
+  .diagrama__centro {
+    position: absolute;
+    width: 44%;
+    height: 44%;
+    border-radius: 50%;
+    background: var(--rojo);
+    color: #fff;
+    display: grid;
+    place-items: center;
+    text-align: center;
+    /* 13px como máximo; en celulares se achica para no salirse del círculo */
+    font-size: clamp(10px, 3vw, 13px);
+    font-weight: 700;
+    letter-spacing: .06em;
+    text-transform: uppercase;
+    padding: 8%;
+    z-index: 2;
+  }
+
+  /* ---------- Nodos sobre el anillo ---------- */
+  .nodo {
+    position: absolute;
+    width: 34%;
+    padding: 14px 8px;
+    background: #fff;
+    border: 2px solid var(--gris-900);
+    border-radius: 12px;
+    text-align: center;
+    font-weight: 700;
+    font-size: 14px;
+    box-shadow: var(--sombra);
+  }
+
+  .nodo small {
+    display: block;
+    font-weight: 500;
+    font-size: 12px;
+    color: var(--gris-600);
+    margin-top: 2px;
+  }
+
+  /* Arriba al centro: El Molino */
+  .nodo--a {
+    top: -4%;
+    left: 50%;
+    transform: translateX(-50%);
+  }
+
+  /* Abajo a la izquierda: Empresas */
+  .nodo--b {
+    bottom: 6%;
+    left: -2%;
+  }
+
+  /* Abajo a la derecha: Empleados */
+  .nodo--c {
+    bottom: 6%;
+    right: -2%;
+  }
+
+  /* ---------- Flechas (giran en sentido horario) ---------- */
+  .diagrama__flecha {
+    position: absolute;
+    font-size: 22px;
+    color: var(--rojo);
+    font-weight: 700;
+  }
+
+  /* El Molino → Empleados */
+  .f1 {
+    top: 26%;
+    right: 8%;
+    transform: rotate(55deg);
+  }
+
+  /* Empleados → Empresas */
+  .f2 {
+    bottom: 14%;
+    left: 50%;
+    transform: translateX(-50%) rotate(180deg);
+  }
+
+  /* Empresas → El Molino */
+  .f3 {
+    top: 26%;
+    left: 8%;
+    transform: rotate(-55deg);
+  }
+</style>
