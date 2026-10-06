@@ -17,7 +17,7 @@ interface Props {
 const { carrera } = Astro.props;
 ---
 
-<article class="carrera">
+<article class="carrera revelar">
   <h3>{carrera.nombre}</h3>
   {carrera.nota && <p class="carrera__nota">({carrera.nota})</p>}
   <p set:html={carrera.descripcion} />
