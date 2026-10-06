@@ -1,0 +1,108 @@
+---
+import Layout from '../layouts/Layout.astro';
+
+/* Las 3 líneas de servicio que el ITEC ofrece a empresas.
+   Cada una tiene su ícono, uno o más párrafos y, opcionalmente,
+   una lista de ítems. */
+const servicios = [
+  {
+    icono: '🔬',
+    titulo: 'Servicios Tecnológicos',
+    parrafos: [
+      'Para que las empresas cumplan con los estándares de calidad que demanda el mercado, son necesarias diferentes metodologías de medición y control, por lo tanto el ITEC El Molino brinda en sus laboratorios servicios de ensayos destructivos (tracción, dureza de metales), no destructivos (tintas penetrantes, mediciones por ultrasonido) y metalografía.',
+    ],
+    items: [
+      'Ensayos destructivos',
+      'Ensayos No destructivos',
+      'Ensayos metalográficos',
+      'Soldadura',
+    ],
+  },
+  {
+    icono: '🤝',
+    titulo: 'UVT',
+    parrafos: [
+      'Asiste en el desarrollo de proyectos orientados al fortalecimiento de actividades productivas y comerciales, al fomento de innovaciones que impliquen investigación y desarrollo, transmisión de tecnología y asistencia técnica.',
+      'Facilita la búsqueda de herramientas, la gestión, organización y el gerenciamiento de los proyectos.',
+      'Programas de distintos organismos nacionales, provinciales y locales.',
+    ],
+    items: [],
+  },
+  {
+    icono: '📋',
+    titulo: 'Asistencia Técnica y Consultoría',
+    parrafos: [
+      'Servicios de Consultoría y Asistencia Técnica a medida en Gestión de RR.HH, Diseño de sistemas de calidad, Implementación de normas de calidad, Reingeniería de empresas, Automatización y control de la producción, Planes de negocio y de marketing, Gestión de la producción',
+    ],
+    items: [],
+  },
+];
+---
+
+<Layout title="Servicios">
+
+  <main>
+
+    <!-- Banda de título -->
+    <section class="banda" style="--acento:var(--rojo)">
+      <div class="contenedor">
+        <p class="etiqueta">Servicios</p>
+        <h1>Asistencia técnica y servicios tecnológicos</h1>
+        <p class="banda__intro">
+          Para que las empresas puedan asimilar lo que sucede en el mundo,
+          adecuarse a los cambios y manejarse con eficiencia, competitividad y
+          rentabilidad, brindamos asistencia técnica y servicios tecnológicos.
+        </p>
+      </div>
+    </section>
+
+    <!-- Líneas de servicio -->
+    <section class="seccion">
+      <div class="contenedor">
+
+        <div class="grilla grilla--3 revelar">
+
+          {
+            servicios.map((servicio) => (
+              <article class="tarjeta">
+
+                <div class="tarjeta__icono" aria-hidden="true">{servicio.icono}</div>
+
+                <h2 class="h3">{servicio.titulo}</h2>
+
+                {servicio.parrafos.map((parrafo) => (
+                  <p class="bajada">{parrafo}</p>
+                ))}
+
+                {servicio.items.length > 0 && (
+                  <ul class="bajada lista-servicio">
+                    {servicio.items.map((item) => (
+                      <li>› {item}</li>
+                    ))}
+                  </ul>
+                )}
+
+              </article>
+            ))
+          }
+
+        </div>
+
+      </div>
+    </section>
+
+  </main>
+
+</Layout>
+
+<style>
+  /* Fondo rojo muy suave para los íconos de esta página */
+  .tarjeta__icono {
+    background: rgba(176, 30, 40, .08);
+  }
+
+  /* Lista sin viñetas: cada ítem ya trae su "›" */
+  .lista-servicio {
+    list-style: none;
+  }
+</style>
