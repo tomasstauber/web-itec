@@ -1,0 +1,274 @@
+---
+import Layout from '../layouts/Layout.astro';
+
+/* Medios de contacto de la columna izquierda.
+   `href` es opcional: si está, el dato se puede tocar (mail o llamada). */
+const datos = [
+  {
+    icono: '📍',
+    titulo: 'ITEC EL MOLINO',
+    texto: 'Rivadavia 1390, 1er. Piso. Esperanza. Santa Fe',
+  },
+  {
+    icono: '✉️',
+    texto: 'info@itec-elmolino.edu.ar',
+    href: 'mailto:info@itec-elmolino.edu.ar',
+  },
+  {
+    icono: '📞',
+    texto: 'Tel: 03496 - 426593',
+    href: 'tel:03496426593',
+  },
+  {
+    icono: '💬',
+    texto: 'Ws: 03496-15502218',
+    href: 'https://wa.me/5493496502218',
+  },
+];
+
+/* Campos del formulario: todos obligatorios.
+   `error` es el mensaje que aparece debajo de ESE campo si no pasa la validación. */
+const campos = [
+  { id: 'cNombre', etiqueta: 'Nombre', tipo: 'text', autocompletar: 'name', error: 'Ingresá tu nombre.' },
+  { id: 'cEmail', etiqueta: 'Email', tipo: 'email', autocompletar: 'email', error: 'Ingresá un email válido.' },
+  { id: 'cAsunto', etiqueta: 'Asunto', tipo: 'text', autocompletar: undefined, error: 'Contanos el motivo de tu consulta.' },
+  { id: 'cMensaje', etiqueta: 'Mensaje', tipo: 'textarea', autocompletar: undefined, error: 'Escribí tu mensaje.' },
+];
+---
+
+<Layout title="Contacto">
+
+  <main>
+
+    <!-- Banda de título -->
+    <section class="banda" style="--acento:var(--gris-900)">
+      <div class="contenedor">
+        <p class="etiqueta">Contacto</p>
+        <h1>Hablemos</h1>
+      </div>
+    </section>
+
+    <section class="seccion">
+      <div class="contenedor">
+
+        <div class="grilla grilla--2 revelar contacto">
+
+          <!-- Columna izquierda: datos + mapa -->
+          <div>
+
+            {
+              datos.map((dato) => (
+                <div class="dato-contacto">
+                  <div class="tarjeta__icono" aria-hidden="true">{dato.icono}</div>
+                  <p class="bajada">
+                    {dato.titulo && (
+                      <>
+                        <strong>{dato.titulo}</strong>
+                        <br />
+                      </>
+                    )}
+                    {dato.href ? <a href={dato.href}>{dato.texto}</a> : dato.texto}
+                  </p>
+                </div>
+              ))
+            }
+
+            <div class="mapa">
+              <iframe
+                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3403.466313450387!2d-60.93262892373156!3d-31.45635627424329!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x95b5133d054ac1dd%3A0x9896a038fd05cf16!2sFundaci%C3%B3n%20Instituto%20Tecnol%C3%B3gico%20%22El%20Molino%22!5e0!3m2!1ses-419!2sar!4v1791255992995!5m2!1ses-419!2sar"
+                title="Mapa: ITEC El Molino, Rivadavia 1390, Esperanza"
+                loading="lazy"
+                referrerpolicy="no-referrer-when-downgrade"
+                allowfullscreen
+              ></iframe>
+            </div>
+          
+          </div>
+
+          <!-- Columna derecha: formulario -->
+          <form class="tarjeta" id="formContacto" novalidate>
+
+            <h2 class="h3">Envianos tu consulta</h2>
+
+            {
+              campos.map((campo) => (
+                <div class="campo">
+                  <label for={campo.id}>{campo.etiqueta} *</label>
+
+                  {campo.tipo === 'textarea' ? (
+                    <textarea
+                      id={campo.id}
+                      name={campo.id}
+                      rows="5"
+                      required
+                      aria-describedby={`${campo.id}Error`}
+                    />
+                  ) : (
+                    <input
+                      id={campo.id}
+                      name={campo.id}
+                      type={campo.tipo}
+                      required
+                      autocomplete={campo.autocompletar}
+                      aria-describedby={`${campo.id}Error`}
+                    />
+                  )}
+
+                  <span class="error" id={`${campo.id}Error`}>{campo.error}</span>
+                </div>
+              ))
+            }
+
+            <button class="btn btn--primario" type="submit">Enviar</button>
+
+            <p class="form-ok" id="okContacto" role="status">
+              ¡Gracias! Tu mensaje fue enviado. (Demostración)
+            </p>
+
+          </form>
+
+        </div>
+
+      </div>
+    </section>
+
+  </main>
+
+</Layout>
+
+<style>
+  /* Las dos columnas arrancan arriba, aunque tengan distinto alto */
+  .contacto {
+    align-items: start;
+  }
+
+  /* ---------- Datos de contacto: ícono + texto ---------- */
+  .dato-contacto {
+    display: flex;
+    gap: 14px;
+    align-items: flex-start;
+    margin-bottom: 18px;
+  }
+
+  .dato-contacto .tarjeta__icono {
+    width: 42px;
+    height: 42px;
+    font-size: 18px;
+    flex: none;
+  }
+
+  .dato-contacto strong {
+    color: var(--gris-900);
+  }
+
+  /* Los links (mail y teléfono) se ven igual que el resto del texto */
+  .dato-contacto a {
+    color: inherit;
+  }
+
+  .dato-contacto a:hover {
+    color: var(--rojo);
+  }
+
+  /* ---------- Mapa (placeholder rayado, como en el prototipo) ---------- */
+  .mapa {
+    margin-top: 24px;
+    border-radius: var(--radio);
+    overflow: hidden;
+    background: repeating-linear-gradient(
+      45deg,
+      #e4e9e4 0 14px,
+      #eef2ee 14px 28px
+    );
+    min-height: 240px;
+    display: grid;
+    place-items: center;
+    border: 1px solid var(--gris-300);
+  }
+
+  .mapa iframe {
+  display: block;
+  width: 100%;
+  height: 320px;
+  border: 0;
+}
+
+  /* ---------- Formulario ---------- */
+
+  /* El textarea solo se puede agrandar hacia abajo, para no romper la tarjeta */
+  .campo textarea {
+    resize: vertical;
+  }
+
+  /* La confirmación se muestra cuando el JS le agrega .visible */
+  .form-ok.visible {
+    display: block;
+  }
+</style>
+
+<script>
+  /* Validación del formulario de contacto en el navegador
+     (demostración: no envía datos a ningún lado). */
+  const EMAIL_VALIDO = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+  const SEGUNDOS_CONFIRMACION = 4;
+
+  type Control = HTMLInputElement | HTMLTextAreaElement;
+
+  const form = document.getElementById('formContacto');
+  const ok = document.getElementById('okContacto');
+
+  if (form instanceof HTMLFormElement && ok) {
+    const controles = Array.from(form.querySelectorAll<Control>('input, textarea'));
+    let temporizador: number | undefined;
+
+    // Un campo es válido si no está vacío; el email además debe tener formato correcto
+    function esValido(control: Control) {
+      const valor = control.value.trim();
+      return control.type === 'email' ? EMAIL_VALIDO.test(valor) : valor !== '';
+    }
+
+    // Marca (o desmarca) el error en ESE campo: .invalido pinta el borde
+    // en rojo y muestra el mensaje de abajo (ver global.css)
+    function marcar(control: Control, valido: boolean) {
+      control.closest('.campo')?.classList.toggle('invalido', !valido);
+      control.setAttribute('aria-invalid', String(!valido));
+    }
+
+    form.addEventListener('submit', (evento) => {
+      evento.preventDefault(); // evita que el navegador recargue la página
+
+      // Se revisan TODOS los campos, para marcar todos los errores a la vez
+      const invalidos = controles.filter((control) => {
+        const valido = esValido(control);
+        marcar(control, valido);
+        return !valido;
+      });
+
+      if (invalidos.length > 0) {
+        ok.classList.remove('visible');
+        invalidos[0].focus(); // lleva el cursor al primer campo con error
+        return;
+      }
+
+      // Todo correcto: se muestra la confirmación y se limpia el formulario
+      form.reset();
+      ok.classList.add('visible');
+
+      window.clearTimeout(temporizador);
+      temporizador = window.setTimeout(
+        () => ok.classList.remove('visible'),
+        SEGUNDOS_CONFIRMACION * 1000,
+      );
+    });
+
+    // Al corregir un campo marcado, su error desaparece sin esperar al envío
+    controles.forEach((control) => {
+      control.addEventListener('input', () => {
+        const campo = control.closest('.campo');
+        if (campo?.classList.contains('invalido') && esValido(control)) {
+          marcar(control, true);
+        }
+      });
+    });
+  }
+</script>
