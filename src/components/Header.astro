@@ -1,0 +1,540 @@
+---
+/* ============================================================
+   HEADER — Issue #2
+   Aparece en todas las páginas (se incluye desde Layout.astro).
+   Para agregar, quitar o corregir un link alcanza con tocar
+   la lista NAV de acá abajo: el menú de escritorio y el panel
+   mobile se generan los dos a partir de ella.
+   ============================================================ */
+
+interface Enlace {
+  texto: string;
+  href: string;
+  /* Página todavía no publicada: apunta al inicio de forma provisoria
+     y no se marca como activa. Quitar `pendiente` al corregir el href. */
+  pendiente?: boolean;
+}
+
+interface Item extends Enlace {
+  /* Si tiene hijos, el ítem es un desplegable (y `href` es la raíz del grupo). */
+  hijos?: Enlace[];
+  /* Texto que antecede a los hijos en el panel mobile ("Institucional · …"). */
+  prefijoMovil?: string;
+  /* El grupo también se muestra como link propio en el panel mobile. */
+  enlaceMovil?: boolean;
+  /* Estilo atenuado de "Empresas que Educan". */
+  variante?: 'empresas';
+}
+
+const NAV: Item[] = [
+  { texto: 'Inicio', href: '/' },
+  {
+    texto: 'Institucional',
+    href: '/institucional',
+    prefijoMovil: 'Institucional · ',
+    hijos: [
+      { texto: 'Misión y Visión', href: '/institucional/mision' },
+      { texto: 'Autoridades', href: '/institucional/autoridades' },
+      { texto: 'Equipo de trabajo', href: '/institucional/equipo' },
+      { texto: 'Articulación', href: '/institucional/articulacion' },
+      { texto: 'Noticias', href: '/institucional/noticias' },
+      { texto: 'Infraestructura y Equipamiento', href: '/institucional/infraestructura' },
+    ],
+  },
+  {
+    texto: 'Formación',
+    href: '/formacion',
+    enlaceMovil: true,
+    hijos: [
+      { texto: 'Nuestra propuesta', href: '/formacion' },
+      /* TODO: reemplazar por la ruta real cuando estén listos los issues #15, #16 y #17 */
+      { texto: 'Tecnicaturas', href: '/', pendiente: true },
+      { texto: 'Formación Profesional', href: '/', pendiente: true },
+      { texto: 'Capacitaciones', href: '/', pendiente: true },
+    ],
+  },
+  { texto: 'Servicios', href: '/servicios' },
+  { texto: 'Contacto', href: '/contacto' },
+  { texto: 'Empresas que Educan', href: '/empresas', variante: 'empresas' },
+];
+
+const CTA: Enlace = { texto: 'Conocé la oferta 2026', href: '/formacion' };
+
+/* Ruta actual sin barra final ("/formacion/" → "/formacion"; el inicio queda "/"). */
+const ruta = Astro.url.pathname.replace(/\/+$/, '') || '/';
+
+/* Un link está activo solo si coincide exactamente con la ruta actual. */
+const esActivo = (enlace: Enlace) => !enlace.pendiente && enlace.href === ruta;
+
+/* Un desplegable está activo si la ruta pertenece a su grupo. */
+const grupoActivo = (item: Item) =>
+  ruta === item.href || ruta.startsWith(item.href + '/');
+---
+
+<header class="header" id="header">
+  <div class="contenedor">
+    <nav class="nav" aria-label="Navegación principal">
+
+      <a class="logo" href="/" aria-label="ITEC El Molino — Ir al inicio">
+        <span class="logo__marca">ITEC</span>
+        <span class="logo__texto">
+          <b>El Molino</b>
+          <span>Instituto Tecnológico</span>
+        </span>
+      </a>
+
+      <ul class="nav__lista">
+        {NAV.map((item, i) => (
+          item.hijos ? (
+            <li class="nav__item">
+              <button
+                type="button"
+                class:list={['nav__enlace', { activo: grupoActivo(item) }]}
+                data-desplegable
+                aria-haspopup="true"
+                aria-expanded="false"
+                aria-controls={`desplegable-${i}`}
+              >
+                {item.texto} <span class="nav__caret" aria-hidden="true">▾</span>
+              </button>
+              <ul class="desplegable" id={`desplegable-${i}`}>
+                {item.hijos.map(hijo => (
+                  <li>
+                    <a href={hijo.href} aria-current={esActivo(hijo) ? 'page' : undefined}>
+                      {hijo.texto}
+                    </a>
+                  </li>
+                ))}
+              </ul>
+            </li>
+          ) : (
+            <li class="nav__item">
+              <a
+                href={item.href}
+                class:list={[
+                  item.variante === 'empresas' ? 'nav__empresas' : 'nav__enlace',
+                  { activo: esActivo(item) },
+                ]}
+                aria-current={esActivo(item) ? 'page' : undefined}
+              >
+                {item.texto}
+              </a>
+            </li>
+          )
+        ))}
+      </ul>
+
+      <a class="btn btn--primario nav__cta" href={CTA.href}>{CTA.texto}</a>
+
+      <button
+        type="button"
+        class="hamburguesa"
+        id="hamburguesa"
+        aria-label="Abrir menú"
+        aria-expanded="false"
+        aria-controls="menuMovil"
+      >
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+
+    </nav>
+  </div>
+
+  <!-- Panel mobile: mismos links, apilados y en el mismo orden -->
+  <div class="menu-movil" id="menuMovil">
+    {NAV.map(item => (
+      <>
+        {(!item.hijos || item.enlaceMovil) && (
+          <a
+            href={item.href}
+            class:list={[{ activo: esActivo(item) }]}
+            aria-current={esActivo(item) ? 'page' : undefined}
+          >
+            {item.texto}
+          </a>
+        )}
+        {item.hijos
+          ?.filter(hijo => !(item.enlaceMovil && hijo.href === item.href))
+          .map(hijo => (
+            <a
+              href={hijo.href}
+              class:list={['sub', { activo: esActivo(hijo) }]}
+              aria-current={esActivo(hijo) ? 'page' : undefined}
+            >
+              {item.prefijoMovil}{hijo.texto}
+            </a>
+          ))}
+      </>
+    ))}
+    <a class="btn btn--primario" href={CTA.href}>{CTA.texto}</a>
+  </div>
+</header>
+
+<style>
+  /* ---------- Header / Navbar ---------- */
+  .header {
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    background: rgba(255, 255, 255, .96);
+    backdrop-filter: blur(8px);
+    border-bottom: 1px solid var(--gris-300);
+    transition: var(--trans);
+  }
+
+  /* La clase .encogido la agrega el JS al hacer scroll */
+  .header.encogido {
+    box-shadow: var(--sombra);
+  }
+
+  .nav {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    height: 72px;
+  }
+
+  /* ---------- Logo ---------- */
+  .logo {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    color: var(--gris-900);
+    white-space: nowrap;
+    flex: none;
+  }
+
+  .logo__marca {
+    width: 38px;
+    height: 38px;
+    border-radius: 8px;
+    background: var(--rojo);
+    color: #fff;
+    display: grid;
+    place-items: center;
+    font-weight: 800;
+    font-size: 13px;
+    letter-spacing: .02em;
+  }
+
+  .logo__texto {
+    line-height: 1.1;
+  }
+
+  .logo__texto b {
+    display: block;
+    font-size: 16px;
+    font-weight: 800;
+  }
+
+  .logo__texto span {
+    font-size: 11px;
+    color: var(--gris-600);
+    text-transform: uppercase;
+    letter-spacing: .08em;
+  }
+
+  /* ---------- Lista de navegación ---------- */
+  .nav__lista {
+    display: flex;
+    align-items: center;
+    gap: 2px;
+    list-style: none;
+    margin-left: auto;
+  }
+
+  .nav__item {
+    position: relative;
+  }
+
+  .nav__enlace {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    padding: 10px 12px;
+    border-radius: 8px;
+    font-size: 15px;
+    font-weight: 500;
+    color: var(--gris-900);
+    background: none;
+    border: none;
+    white-space: nowrap;
+  }
+
+  .nav__enlace:hover {
+    background: var(--gris-100);
+  }
+
+  .nav__enlace.activo {
+    color: var(--rojo);
+    font-weight: 700;
+  }
+
+  /* Subrayado del ítem activo */
+  .nav__enlace.activo::after {
+    content: "";
+    position: absolute;
+    left: 12px;
+    right: 12px;
+    bottom: 2px;
+    height: 3px;
+    border-radius: 2px;
+    background: var(--rojo);
+  }
+
+  .nav__caret {
+    font-size: 10px;
+    transition: var(--trans);
+  }
+
+  .nav__item.abierto .nav__caret {
+    transform: rotate(180deg);
+  }
+
+  /* ---------- Desplegables ---------- */
+  .desplegable {
+    position: absolute;
+    top: calc(100% + 6px);
+    left: 0;
+    min-width: 230px;
+    background: #fff;
+    border: 1px solid var(--gris-300);
+    border-radius: var(--radio);
+    box-shadow: var(--sombra-hover);
+    padding: 8px;
+    display: none;
+    z-index: 110;
+    list-style: none;
+  }
+
+  /* La clase .abierto la agrega el JS al hacer click en el botón */
+  .nav__item.abierto .desplegable {
+    display: block;
+  }
+
+  .desplegable a {
+    display: block;
+    width: 100%;
+    text-align: left;
+    padding: 10px 12px;
+    border-radius: 6px;
+    font-size: 15px;
+    color: var(--gris-900);
+    white-space: nowrap;
+  }
+
+  .desplegable a:hover,
+  .desplegable a[aria-current="page"] {
+    background: var(--gris-100);
+    color: var(--rojo);
+  }
+
+  /* ---------- CTA y "Empresas que Educan" ---------- */
+  .nav__cta {
+    white-space: nowrap;
+    padding: 11px 18px;
+    font-size: 14px;
+  }
+
+  .nav__empresas {
+    display: block;
+    font-size: 14px;
+    font-weight: 600;
+    color: var(--gris-600);
+    padding: 10px 12px;
+    border-radius: 8px;
+    white-space: nowrap;
+  }
+
+  .nav__empresas:hover,
+  .nav__empresas.activo {
+    color: var(--rojo);
+    background: var(--gris-100);
+  }
+
+  /* ---------- Botón hamburguesa ---------- */
+  .hamburguesa {
+    display: none;
+    margin-left: auto;
+    background: none;
+    border: none;
+    width: 44px;
+    height: 44px;
+    border-radius: 8px;
+  }
+
+  .hamburguesa span {
+    display: block;
+    width: 22px;
+    height: 2px;
+    background: var(--gris-900);
+    margin: 5px auto;
+    transition: var(--trans);
+  }
+
+  .hamburguesa:hover {
+    background: var(--gris-100);
+  }
+
+  /* ---------- Menú mobile ---------- */
+  .menu-movil {
+    display: none;
+    background: #fff;
+    border-bottom: 1px solid var(--gris-300);
+    padding: 8px 24px 24px;
+    /* Si el panel es más alto que la pantalla, se desplaza por dentro */
+    max-height: calc(100vh - 72px);
+    overflow-y: auto;
+  }
+
+  /* La clase .abierto la agrega el JS al tocar la hamburguesa */
+  .menu-movil.abierto {
+    display: block;
+  }
+
+  .menu-movil a {
+    display: block;
+    width: 100%;
+    text-align: left;
+    padding: 14px 8px;
+    border-bottom: 1px solid var(--gris-100);
+    font-size: 16px;
+    font-weight: 500;
+    color: var(--gris-900);
+    min-height: 44px;
+  }
+
+  .menu-movil a.sub {
+    padding-left: 28px;
+    color: var(--gris-600);
+    font-size: 15px;
+  }
+
+  .menu-movil a.activo {
+    color: var(--rojo);
+    font-weight: 700;
+  }
+
+  .menu-movil a.btn {
+    margin-top: 16px;
+    padding: 13px 28px;
+    border: 2px solid transparent;
+    text-align: center;
+    font-size: 15px;
+    font-weight: 600;
+    color: #fff;
+  }
+
+  /* ---------- Foco visible para navegar con teclado ---------- */
+  .logo:focus-visible,
+  .nav__enlace:focus-visible,
+  .nav__empresas:focus-visible,
+  .desplegable a:focus-visible,
+  .hamburguesa:focus-visible,
+  .menu-movil a:focus-visible {
+    outline: 3px solid var(--rojo);
+    outline-offset: 2px;
+  }
+
+  /* ---------- Responsive ----------
+     El menú completo necesita ~1110px de ancho para entrar en una sola
+     línea, así que la hamburguesa aparece a los 1140px (y no a los 900px
+     del resto del sitio) para que el header nunca desborde la pantalla. */
+  @media (max-width: 1140px) {
+    .nav__lista,
+    .nav__cta {
+      display: none;
+    }
+
+    .hamburguesa {
+      display: block;
+    }
+  }
+
+  /* En escritorio el panel mobile nunca se muestra, aunque haya quedado abierto */
+  @media (min-width: 1141px) {
+    .menu-movil.abierto {
+      display: none;
+    }
+  }
+</style>
+
+<script>
+  const header = document.getElementById('header');
+  const hamburguesa = document.getElementById('hamburguesa');
+  const menuMovil = document.getElementById('menuMovil');
+  const botonesDesplegable = document.querySelectorAll('[data-desplegable]');
+
+  /* ---------- Desplegables (Institucional ▾ / Formación ▾) ---------- */
+  function cerrarDesplegables() {
+    document.querySelectorAll('.nav__item.abierto').forEach((item) => {
+      item.classList.remove('abierto');
+      item.querySelector('[data-desplegable]')?.setAttribute('aria-expanded', 'false');
+    });
+  }
+
+  botonesDesplegable.forEach((boton) => {
+    boton.addEventListener('click', (evento) => {
+      evento.stopPropagation(); // evita que el click "afuera" lo cierre al instante
+      const item = boton.closest('.nav__item');
+      if (!item) return;
+
+      const estabaAbierto = item.classList.contains('abierto');
+      cerrarDesplegables(); // solo un desplegable abierto a la vez
+      item.classList.toggle('abierto', !estabaAbierto);
+      boton.setAttribute('aria-expanded', String(!estabaAbierto));
+    });
+  });
+
+  // Click en cualquier otro lado de la página: se cierran
+  document.addEventListener('click', cerrarDesplegables);
+
+  // Si el foco sale del desplegable navegando con Tab, se cierra
+  document.querySelectorAll('.nav__item').forEach((item) => {
+    item.addEventListener('focusout', (evento) => {
+      const destino = (evento as FocusEvent).relatedTarget;
+      if (destino instanceof Node && item.contains(destino)) return;
+      if (item.classList.contains('abierto')) cerrarDesplegables();
+    });
+  });
+
+  /* ---------- Menú hamburguesa (mobile) ---------- */
+  function cerrarMenuMovil() {
+    menuMovil?.classList.remove('abierto');
+    hamburguesa?.setAttribute('aria-expanded', 'false');
+    hamburguesa?.setAttribute('aria-label', 'Abrir menú');
+  }
+
+  hamburguesa?.addEventListener('click', () => {
+    const abierto = menuMovil?.classList.toggle('abierto') ?? false;
+    hamburguesa.setAttribute('aria-expanded', String(abierto));
+    hamburguesa.setAttribute('aria-label', abierto ? 'Cerrar menú' : 'Abrir menú');
+  });
+
+  /* ---------- Teclado: Escape cierra lo que esté abierto ---------- */
+  document.addEventListener('keydown', (evento) => {
+    if (evento.key !== 'Escape') return;
+
+    const itemAbierto = document.querySelector('.nav__item.abierto');
+    if (itemAbierto) {
+      const boton = itemAbierto.querySelector('[data-desplegable]');
+      cerrarDesplegables();
+      if (boton instanceof HTMLElement) boton.focus(); // devuelve el foco al botón
+    }
+
+    if (menuMovil?.classList.contains('abierto')) {
+      cerrarMenuMovil();
+      hamburguesa?.focus();
+    }
+  });
+
+  /* ---------- Sombra sutil del header al hacer scroll ---------- */
+  function actualizarSombra() {
+    header?.classList.toggle('encogido', window.scrollY > 8);
+  }
+
+  window.addEventListener('scroll', actualizarSombra, { passive: true });
+  actualizarSombra();
+</script>
