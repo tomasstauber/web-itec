@@ -27,6 +27,20 @@ const { title } = Astro.props;
   <body>
     <Header />
     <slot />
+
+    <script>
+      // Aparición gradual: agrega .visible a los .revelar al entrar en pantalla
+      const observador = new IntersectionObserver((entradas) => {
+        entradas.forEach((entrada) => {
+          if (entrada.isIntersecting) {
+            entrada.target.classList.add('visible');
+            observador.unobserve(entrada.target);
+          }
+        });
+      }, { threshold: 0.12 });
+
+      document.querySelectorAll('.revelar').forEach((el) => observador.observe(el));
+    </script>
     <Footer />
   </body>
 </html>
