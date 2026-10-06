@@ -1,0 +1,163 @@
+---
+import Layout from '../../layouts/Layout.astro';
+---
+
+<Layout title="Capacitaciones">
+
+  <main>
+
+    <!-- Banda de título -->
+    <section class="banda" style="--acento:var(--cap)">
+      <div class="contenedor">
+        <p class="etiqueta">Formación</p>
+        <h1>Capacitaciones</h1>
+        <p class="banda__intro">
+          Formación, actualización y perfeccionamiento de personas que trabajan
+          en organizaciones, para responder a demandas actuales de los puestos
+          de trabajo y a los cambios de la vida empresarial.
+        </p>
+      </div>
+    </section>
+
+    <!-- Introducción -->
+    <section class="seccion">
+      <div class="contenedor centrado">
+        <p class="bajada intro">
+          Ofrecemos diversas metodologías: seminarios, talleres y cursos,
+          generados a medida de la empresa (capacitaciones internas) y abiertas
+          al público en general. Para profundizar la experiencia obtenida en el
+          puesto, vinculándola con conceptos y fundamentos técnicos de las
+          tareas que realiza.
+        </p>
+      </div>
+    </section>
+
+    <!-- Trayectos y capacitaciones -->
+    <section class="seccion seccion--gris">
+      <div class="contenedor">
+
+        <div class="grilla grilla--2">
+
+          <article class="tarjeta tarjeta--trayecto" style="--acento:var(--cap)">
+            <h2 class="h3">Trayectos Formativos</h2>
+
+            <p class="bajada">
+              Permiten al alumno estructurar y profundizar su formación a través
+              de una secuencia de cursos.
+            </p>
+
+            <a class="btn btn--primario" href="/contacto">
+              Conocé nuestros trayectos formativos
+            </a>
+          </article>
+
+          <article class="tarjeta tarjeta--trayecto" style="--acento:var(--cap)">
+            <h2 class="h3">Capacitaciones Vigentes</h2>
+
+            <p class="bajada">
+              Cursos, talleres y seminarios de actualización y perfeccionamiento.
+            </p>
+
+            <a class="btn btn--primario" href="/contacto">
+              Ver capacitaciones
+            </a>
+          </article>
+
+        </div>
+
+      </div>
+    </section>
+
+    <!-- Boletín informativo -->
+    <section class="seccion">
+      <div class="contenedor centrado boletin">
+
+        <h2>Boletín informativo ITEC</h2>
+
+        <p class="bajada">Deseo suscribirme al Newsletter del ITEC</p>
+
+        <form id="formBoletin" novalidate>
+
+          <div class="campo">
+            <label for="bolNombre">Nombre</label>
+            <input id="bolNombre" type="text" autocomplete="name" />
+          </div>
+
+          <div class="campo">
+            <label for="bolEmail">Email *</label>
+            <input id="bolEmail" type="email" required autocomplete="email" />
+            <span class="error">Ingresá un email válido.</span>
+          </div>
+
+          <button class="btn btn--primario" type="submit">Suscribirme</button>
+
+          <p class="form-ok" id="okBoletin">
+            ¡Listo! Te suscribiste al Boletín informativo ITEC.
+          </p>
+
+        </form>
+
+      </div>
+    </section>
+
+  </main>
+
+</Layout>
+
+<style>
+
+  /* Párrafo introductorio centrado y con ancho de lectura */
+  .intro {
+    max-width: 800px;
+    margin: 0 auto;
+  }
+
+  /* Bloque del boletín: angosto y centrado */
+  .boletin {
+    max-width: 560px;
+  }
+
+  .boletin .bajada {
+    margin: 12px 0 24px;
+  }
+
+  /* Etiquetas y campos alineados a la izquierda dentro del bloque centrado */
+  .boletin .campo {
+    text-align: left;
+  }
+
+  .boletin .btn {
+    background: var(--cap);
+  }
+
+</style>
+
+<script>
+  // Validación del boletín en el navegador (demostración: no envía datos)
+  const EMAIL_VALIDO = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+  const form = document.getElementById('formBoletin');
+  const email = document.getElementById('bolEmail');
+  const ok = document.getElementById('okBoletin');
+
+  if (form instanceof HTMLFormElement && email instanceof HTMLInputElement && ok) {
+
+    form.addEventListener('submit', (evento) => {
+      evento.preventDefault(); // evita que el navegador recargue la página
+
+      const valido = EMAIL_VALIDO.test(email.value.trim());
+
+      // .invalido muestra u oculta el mensaje de error (ver global.css)
+      email.closest('.campo')?.classList.toggle('invalido', !valido);
+
+      if (!valido) {
+        ok.style.display = 'none';
+        return;
+      }
+
+      ok.style.display = 'block';
+      form.reset(); // limpia los campos
+    });
+
+  }
+</script>
